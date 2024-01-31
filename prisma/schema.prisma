@@ -38,7 +38,7 @@ model Deal {
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
-  responsible   User   @relation(fields: [responsibleId], references: [id])
+  responsible   User   @relation(fields: [responsibleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   responsibleId String @map("responsible_id")
 
   @@map("deals")
