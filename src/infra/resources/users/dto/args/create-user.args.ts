@@ -4,5 +4,5 @@ import { CreateUserInput } from '../inputs/create-user.input'
 @InputType()
 export class CreateUserArgs {
   @Field()
-  data: CreateUserInput
+  user: CreateUserInput
 }

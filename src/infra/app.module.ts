@@ -6,6 +6,7 @@ import { envSchema } from './env'
 
 import { join } from 'path'
 import { UsersModule } from './resources/users/users.module'
+import { DealsModule } from './resources/deals/deals.module'
 
 @Module({
   imports: [
@@ -18,8 +19,7 @@ import { UsersModule } from './resources/users/users.module'
       isGlobal: true,
     }),
     UsersModule,
+    DealsModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

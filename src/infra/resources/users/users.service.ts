@@ -8,7 +8,11 @@ import { UsersRepository } from '@/repositories/user.repository'
 export class UsersService {
   constructor(private usersRepo: UsersRepository) {}
 
-  async createUser(user: CreateUserInput) {
+  async getRecentSDRUsers() {
+    return await this.usersRepo.findManyRecent({ page: 1 })
+  }
+
+  async createSDRUser(user: CreateUserInput) {
     const existingUser = await this.usersRepo.findByEmail(user.email)
 
     if (existingUser) {
@@ -19,6 +23,7 @@ export class UsersService {
 
     return await this.usersRepo.create({
       ...user,
+      role: 'SDR',
       password: await hash(user.password, 8),
     })
   }

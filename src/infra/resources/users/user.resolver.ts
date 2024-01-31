@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
-import { UserResponse } from './dto/objects/user.object'
+import { UserObject, UserResponse } from './dto/objects/user.object'
 import { CreateUserArgs } from './dto/args/create-user.args'
 import { UsersService } from '@/infra/resources/users/users.service'
 
@@ -7,15 +7,15 @@ import { UsersService } from '@/infra/resources/users/users.service'
 export class UserResolver {
   constructor(private usersService: UsersService) {}
 
-  @Query(() => String)
-  users() {
-    return 'Hello world'
+  @Query(() => [UserObject])
+  async users() {
+    return await this.usersService.getRecentSDRUsers()
   }
 
   @Mutation(() => UserResponse)
-  async createUser(@Args('createUserArgs') args: CreateUserArgs) {
+  async createSDRUser(@Args('data') args: CreateUserArgs) {
     const { id, email, name, createdAt, updatedAt } =
-      await this.usersService.createUser(args.data)
+      await this.usersService.createSDRUser(args.user)
 
     return {
       id,

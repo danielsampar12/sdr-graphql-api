@@ -2,28 +2,66 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type DealObject {
+  id: String!
+  companyName: String!
+  talkingTo: String!
+  createdAt: String!
+  updatedAt: String
+  responsible: UserObject!
+  responsibleId: String!
+}
+
+type UserObject {
+  id: String!
+  name: String!
+  email: String!
+  password: String!
+  createdAt: String!
+  updatedAt: String
+  deals: [DealObject!]!
+}
+
 type UserResponse {
+  id: String
   name: String
   email: String
   createdAt: String
   updatedAt: String
+  deals: [DealObject!]
+}
+
+type MutationSuccess {
+  success: Boolean!
+  message: String!
 }
 
 type Query {
-  users: String!
+  users: [UserObject!]!
 }
 
 type Mutation {
-  createUser(createUserArgs: CreateUserArgs!): UserResponse!
+  createSDRUser(data: CreateUserArgs!): UserResponse!
   deleteUser: String!
+  createDeal(data: CreateDealArgs!): MutationSuccess!
 }
 
 input CreateUserArgs {
-  data: CreateUserInput!
+  user: CreateUserInput!
 }
 
 input CreateUserInput {
   name: String!
   email: String!
   password: String!
+}
+
+input CreateDealArgs {
+  deal: CreateDealInput!
+}
+
+input CreateDealInput {
+  companyName: String!
+  talkingTo: String!
+  responsibleId: String!
 }

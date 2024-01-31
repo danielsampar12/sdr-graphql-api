@@ -33,6 +33,13 @@ export class PrismaUsersRepository implements UsersRepository {
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        deals: {
+          include: {
+            responsible: true,
+          },
+        },
+      },
     })
   }
 

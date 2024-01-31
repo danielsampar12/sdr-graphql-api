@@ -1,7 +1,11 @@
+import { DealObject } from '@/infra/resources/deals/dto/objects/deal.objectType'
 import { Field, ObjectType, OmitType, PartialType } from '@nestjs/graphql'
 
 @ObjectType()
 export class UserObject {
+  @Field()
+  id: string
+
   @Field()
   name: string
 
@@ -16,6 +20,9 @@ export class UserObject {
 
   @Field({ nullable: true })
   updatedAt: string
+
+  @Field(() => [DealObject])
+  deals: DealObject[]
 }
 
 @ObjectType()
