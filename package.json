@@ -25,7 +25,6 @@
     "@prisma/client": "^5.9.0",
     "bcryptjs": "^2.4.3",
     "graphql": "^16.8.1",
-    "i": "^0.3.7",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "zod": "^3.22.4",
