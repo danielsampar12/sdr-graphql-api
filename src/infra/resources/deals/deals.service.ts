@@ -6,7 +6,11 @@ import { Prisma } from '@prisma/client'
 export class DealsService {
   constructor(private dealsRepository: DealsRespository) {}
 
-  async createDeal(data: Prisma.DealUncheckedCreateInput) {
+  async create(data: Prisma.DealUncheckedCreateInput) {
     return await this.dealsRepository.create(data)
+  }
+
+  async getAll() {
+    return await this.dealsRepository.getAllDeals()
   }
 }

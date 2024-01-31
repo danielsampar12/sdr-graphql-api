@@ -1,12 +1,15 @@
 import { MigrationSucess } from '@/interfaces/migration-success'
 import { DealsRespository } from '@/repositories/deals.repository'
 import { Injectable } from '@nestjs/common'
-import { Prisma } from '@prisma/client'
+import { Deal, Prisma } from '@prisma/client'
 import { PrismaService } from '../prisma.service'
 
 @Injectable()
 export class PrismaDealsRepository implements DealsRespository {
   constructor(private readonly prisma: PrismaService) {}
+  async getAllDeals(): Promise<Deal[]> {
+    return await this.prisma.deal.findMany({ include: { responsible: true } })
+  }
 
   async create(
     data: Prisma.DealUncheckedCreateInput,

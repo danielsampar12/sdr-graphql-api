@@ -34,11 +34,7 @@ export class PrismaUsersRepository implements UsersRepository {
         createdAt: 'desc',
       },
       include: {
-        deals: {
-          include: {
-            responsible: true,
-          },
-        },
+        deals: true,
       },
     })
   }

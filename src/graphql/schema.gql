@@ -38,6 +38,7 @@ type MutationSuccess {
 
 type Query {
   users: [UserObject!]!
+  deals: [DealObject!]!
 }
 
 type Mutation {
