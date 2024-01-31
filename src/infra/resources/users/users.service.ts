@@ -3,6 +3,7 @@ import { CreateUserInput } from './dto/inputs/create-user.input'
 import { GraphQLError } from 'graphql'
 import { hash } from 'bcryptjs'
 import { UsersRepository } from '@/repositories/user.repository'
+import { MutationSuccess } from '@/infra/common/objectTypes/mutation-success.objectType'
 
 @Injectable()
 export class UsersService {
@@ -10,6 +11,12 @@ export class UsersService {
 
   async getRecentSDRUsers() {
     return await this.usersRepo.findManyRecent({ page: 1 })
+  }
+
+  async delete(id: string): Promise<MutationSuccess> {
+    await this.usersRepo.delete(id)
+
+    return { message: `Deleted user with id: ${id}`, success: true }
   }
 
   async createSDRUser(user: CreateUserInput) {

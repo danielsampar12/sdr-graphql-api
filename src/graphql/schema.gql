@@ -43,7 +43,7 @@ type Query {
 
 type Mutation {
   createSDRUser(data: CreateUserArgs!): UserResponse!
-  deleteUser: String!
+  deleteUser(user: DeleteUserArgs!): MutationSuccess!
   createDeal(data: CreateDealArgs!): MutationSuccess!
 }
 
@@ -55,6 +55,10 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
+}
+
+input DeleteUserArgs {
+  id: String!
 }
 
 input CreateDealArgs {

@@ -2,6 +2,8 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
 import { UserObject, UserResponse } from './dto/objects/user.object'
 import { CreateUserArgs } from './dto/args/create-user.args'
 import { UsersService } from '@/infra/resources/users/users.service'
+import { MutationSuccess } from '@/infra/common/objectTypes/mutation-success.objectType'
+import { DeleteUserArgs } from './dto/args/delete-user.args'
 
 @Resolver()
 export class UserResolver {
@@ -26,8 +28,8 @@ export class UserResolver {
     }
   }
 
-  @Mutation(() => String)
-  deleteUser() {
-    return 'Usuário criado'
+  @Mutation(() => MutationSuccess)
+  async deleteUser(@Args('user') args: DeleteUserArgs) {
+    return await this.usersService.delete(args.id)
   }
 }
