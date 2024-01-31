@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { CreateUserInput } from './dto/inputs/create-user.input'
 import { GraphQLError } from 'graphql'
 import { hash } from 'bcryptjs'
-import { UsersRepository } from '@/repositories/user.repository'
+import { SaveUser, UsersRepository } from '@/repositories/user.repository'
 import { MutationSuccess } from '@/infra/common/objectTypes/mutation-success.objectType'
 
 @Injectable()
@@ -11,12 +11,6 @@ export class UsersService {
 
   async getRecentSDRUsers() {
     return await this.usersRepo.findManyRecent({ page: 1 })
-  }
-
-  async delete(id: string): Promise<MutationSuccess> {
-    await this.usersRepo.delete(id)
-
-    return { message: `Deleted user with id: ${id}`, success: true }
   }
 
   async createSDRUser(user: CreateUserInput) {
@@ -33,5 +27,17 @@ export class UsersService {
       role: 'SDR',
       password: await hash(user.password, 8),
     })
+  }
+
+  async delete(id: string): Promise<MutationSuccess> {
+    await this.usersRepo.delete(id)
+
+    return { message: `Deleted user with id: ${id}`, success: true }
+  }
+
+  async save(user: SaveUser, id: string): Promise<MutationSuccess> {
+    await this.usersRepo.saveSDRUser(user, id)
+
+    return { message: `Updated user with id: ${id}`, success: true }
   }
 }

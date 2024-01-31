@@ -44,6 +44,7 @@ type Query {
 type Mutation {
   createSDRUser(data: CreateUserArgs!): UserResponse!
   deleteUser(user: DeleteUserArgs!): MutationSuccess!
+  saveUser(data: SaveUserArgs!): MutationSuccess!
   createDeal(data: CreateDealArgs!): MutationSuccess!
 }
 
@@ -59,6 +60,17 @@ input CreateUserInput {
 
 input DeleteUserArgs {
   id: String!
+}
+
+input SaveUserArgs {
+  user: SaveUserInput!
+  id: String!
+}
+
+input SaveUserInput {
+  email: String
+  name: String
+  password: String
 }
 
 input CreateDealArgs {

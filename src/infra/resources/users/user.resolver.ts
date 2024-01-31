@@ -4,6 +4,7 @@ import { CreateUserArgs } from './dto/args/create-user.args'
 import { UsersService } from '@/infra/resources/users/users.service'
 import { MutationSuccess } from '@/infra/common/objectTypes/mutation-success.objectType'
 import { DeleteUserArgs } from './dto/args/delete-user.args'
+import { SaveUserArgs } from './dto/args/save-user.args'
 
 @Resolver()
 export class UserResolver {
@@ -31,5 +32,10 @@ export class UserResolver {
   @Mutation(() => MutationSuccess)
   async deleteUser(@Args('user') args: DeleteUserArgs) {
     return await this.usersService.delete(args.id)
+  }
+
+  @Mutation(() => MutationSuccess)
+  async saveUser(@Args('data') args: SaveUserArgs) {
+    return await this.usersService.save(args.user, args.id)
   }
 }
