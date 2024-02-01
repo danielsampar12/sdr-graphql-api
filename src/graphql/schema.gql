@@ -36,6 +36,11 @@ type MutationSuccess {
   message: String!
 }
 
+type LoginResponse {
+  access_token: String!
+  success: Boolean!
+}
+
 type Query {
   users: [UserObject!]!
   deals: [DealObject!]!
@@ -43,6 +48,7 @@ type Query {
 
 type Mutation {
   createSDRUser(data: CreateUserArgs!): UserResponse!
+  login(user: LoginInput!): LoginResponse!
   deleteUser(user: DeleteUserArgs!): MutationSuccess!
   saveUser(data: SaveUserArgs!): MutationSuccess!
   createDeal(data: CreateDealArgs!): MutationSuccess!
@@ -54,6 +60,11 @@ input CreateUserArgs {
 
 input CreateUserInput {
   name: String!
+  email: String!
+  password: String!
+}
+
+input LoginInput {
   email: String!
   password: String!
 }

@@ -5,6 +5,8 @@ import { UsersService } from '@/infra/resources/users/users.service'
 import { MutationSuccess } from '@/infra/common/objectTypes/mutation-success.objectType'
 import { DeleteUserArgs } from './dto/args/delete-user.args'
 import { SaveUserArgs } from './dto/args/save-user.args'
+import { LoginResponse } from './dto/objects/login.object'
+import { LoginInput } from './dto/inputs/login.input'
 
 @Resolver()
 export class UserResolver {
@@ -26,6 +28,15 @@ export class UserResolver {
       name,
       createdAt: createdAt.toISOString(),
       updatedAt: updatedAt.toISOString(),
+    }
+  }
+
+  @Mutation(() => LoginResponse)
+  async login(@Args('user') args: LoginInput) {
+    const accessToken = await this.usersService.login(args.email, args.password)
+
+    return {
+      access_token: accessToken,
     }
   }
 
