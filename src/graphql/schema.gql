@@ -52,6 +52,7 @@ type Mutation {
   deleteUser(user: DeleteUserArgs!): MutationSuccess!
   saveUser(data: SaveUserArgs!): MutationSuccess!
   createDeal(data: CreateDealArgs!): MutationSuccess!
+  createFileJob(data: CreateDealArgs!): MutationSuccess!
 }
 
 input CreateUserArgs {
